@@ -44,3 +44,9 @@ function find(type, page = 1, count = 20, search = ''){
 function findOne(id) {
   return fetchApi('subject/' + id).then(res => res.data)
 }
+
+
+module.exports = {
+  find,
+  findOne
+}
