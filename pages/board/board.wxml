@@ -1,2 +1,36 @@
 <!--pages/board/board.wxml-->
-<text>pages/board/board.wxml</text>
+<view class='container'>
+  <!-- 轮播图 -->
+  <view class='slide'>
+    <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+      <swiper-item wx:for="{{ boards[0].movies }}" wx:key="id" wx:for-index="index" wx:for-item="item">
+        <image src='{{ item.images.large }}' mode="widthFix"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 主体内容 -->
+  <view class='board' scroll-y="true">
+    <block wx:for="{{ boards }}" wx:key="key">
+      <view class='board-item'>
+        <!-- 导航 -->
+        <navigator url='../list/list?type={{item.key}}&title={{item.title}}' hover-class='none'>
+          <view class='title'>
+            <text>{{ item.title }}</text>
+            <image src='../../images/arrowright.png' mode="aspectFill"></image>
+          </view>
+        </navigator>
+        <!-- 滚动内容 -->
+        <scroll-view class='content' scroll-x="true">
+          <view class='inner'>
+            <navigator wx:for="{{ item.movies }}" wx:key="id" url='' hover-class='none'>
+              <view class='movie-item'>
+                <image src='{{ item.images.large }}' mode='aspectFill'></image>
+                <text>{{ item.title }}</text>
+              </view>
+            </navigator>
+          </view>
+        </scroll-view>
+      </view>
+    </block>
+  </view>
+</view>

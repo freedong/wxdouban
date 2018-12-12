@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/splash/splash",
-    "pages/board/board"
+    "pages/board/board",
+    "pages/search/search",
+    "pages/profile/profile",
+    "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -10,5 +13,32 @@
     "navigationBarTextStyle": "white",
     "backgroundColor": "#f8f9fb",
     "enablePullDownRefresh": false
-  }
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/board/board",
+        "text": "榜单",
+        "iconPath": "images/board.png",
+        "selectedIconPath": "images/board-actived.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
+        "iconPath": "images/search.png",
+        "selectedIconPath": "images/search-actived.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-actived.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "downloadFile": 20000
+  },
+  "debug": false
 }

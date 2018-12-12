@@ -13,7 +13,7 @@ Page({
   },
 
 
-  // 
+  // 立即体验按钮  点击进入榜单页
   handleStart() {
     wx.switchTab({
       url: '../board/board',

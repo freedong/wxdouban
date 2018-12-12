@@ -1,0 +1,65 @@
+<!-- 两种渲染模式 -->
+<!-- 第一种   item中的json数据中没有subject的 -->
+<!-- 渲染普通的单项数据 -->
+<!-- 例如：https://api.douban.com/v2/movie/top250?count=1 -->
+<!-- 电影列表组件 -->
+<template name="item1">
+  <!-- 链接到单个电影详情页 -->
+  <navigator url='../item/item?id={{ item.id }}'>
+    <view class="item">
+      <image src='{{ item.images.small }}' class='poster'></image>
+      <view class="meta">
+        <text class="title">{{ item.title }}</text>
+        <text class="sub-title">{{ item.original_title }} ({{ item.year }})</text>
+        <view class='artists'>
+          导演：
+          <block wx:for="{{ item.directors }}">{{ item.name }}</block>
+        </view>
+      </view>
+      <view class="rating">
+        <text>{{ item.rating.average }}</text>
+      </view>
+    </view>
+  </navigator>
+</template>
+
+
+<!-- 第二种   item中的json数据中有subject的 -->
+<!-- 在北美电影排行的API中数据格式与普通的API不同，这里是渲染北美电影排行的数据 -->
+<!-- 例如：https://api.douban.com/v2/movie/us_box?count=1 -->
+<!-- 电影列表组件 -->
+<template name="item2">
+  <!-- 链接到单个电影详情页 -->
+  <navigator url='../item/item?id={{ item.subject.id }}'>
+    <view class='item'>
+      <image class="poster" src='{{  }}'></image>
+    </view>
+  </navigator>
+</template>
+
+
+
+
+
+
+
+
+
+
+<!-- 电影列表组件 供每一个列表展示的页面使用 -->
+
+<template name="movie-list">
+  <view class='list'>
+    <!-- 引入模板 -->
+    <template is="{{ item.subject ? 'item2' : 'item1' }}" data="{{ item }}" wx:for="{{ movies }}" wx:key="id"></template>
+    <view class='tips'>
+      <view wx:if="{{ hasMore }}">
+        <image src='/images/loading.gif' mode='aspectFill'></image>
+        <text>玩了命的加载中...</text>
+      </view>
+      <view wx:else>
+        <text>没有更多内容了</text>
+      </view>
+    </view>
+  </view>
+</template>
