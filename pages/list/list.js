@@ -63,7 +63,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    wx.setNavigationBarTitle({
+      title: this.data.title,
+    })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#d83352',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
   },
 
   /**
@@ -91,14 +101,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    // 先初始化数据
+    this.setData({ movies: [], page: 1, hasMore: true, })
+    this.loadMore().then(() => wx.stopPullDownRefresh())
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.loadMore()
   },
 
   /**

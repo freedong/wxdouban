@@ -4,7 +4,8 @@
     "pages/board/board",
     "pages/search/search",
     "pages/profile/profile",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/item/item"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -1,5 +1,21 @@
 
 
+// 登录
+function login() {
+  return new Promise((resolve, reject) => {
+    wx.login({ success: resolve, fail: reject })
+  })
+}
+// 获取用户
+function getUserInfo () {
+  return new Promise((resolve, reject) => {
+    wx.getUserInfo({
+      success: resolve,
+      fail: reject
+    })
+  })
+}
+
 // 得到存储
 function getStorage(key){
   return new Promise((resolve, reject) => {
@@ -36,5 +52,7 @@ function getLocation(type){
 module.exports = {
   getLocation,
   getStorage,
-  setStorage
+  setStorage,
+  login,
+  getUserInfo
 }

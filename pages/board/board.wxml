@@ -22,7 +22,7 @@
         <!-- 滚动内容 -->
         <scroll-view class='content' scroll-x="true">
           <view class='inner'>
-            <navigator wx:for="{{ item.movies }}" wx:key="id" url='' hover-class='none'>
+            <navigator wx:for="{{ item.movies }}" wx:key="id" url='../item/item?id={{ item.id }}' hover-class='none'>
               <view class='movie-item'>
                 <image src='{{ item.images.large }}' mode='aspectFill'></image>
                 <text>{{ item.title }}</text>

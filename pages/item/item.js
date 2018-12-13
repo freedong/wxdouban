@@ -1,45 +1,49 @@
 
 const app = getApp()
 
-// pages/profile/profile.js
+// pages/item/item.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title: 'About me',
-    userInfo: {
-      wechat: 'WEDN-NET',
-      nickName: 'https://github.com/zce/weapp-douban',
-      avatarUrl: '../../images/qrcode.png'
-    }
-  },
-
-
-  // 获取用户函数
-  getUserInfo () {
-    app.wechat.getUserInfo().then(res => {
-      console.log(res)
-      this.setData({
-        userInfo: res.userInfo
-      })
-    })
+    title:'',
+    movie:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.wechat.login().then(res => {
-      console.log(res)
-      if(res.code){
-        // this.getUserInfo()
-        console.log('登录成功！' + res.code)
-      }else{
-        console.error('获取用户登录态失败！' + res.errMsg)
-      }
+    console.log(options)
+
+    wx.showLoading({
+      title: '拼命加载中...',
     })
+
+    app.douban.findOne(options.id).then( d => {
+      console.log(d)
+      this.setData({ title: d.title, movie: d })
+      wx.setNavigationBarTitle({
+        title: this.data.title,
+      }) 
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#d83352',
+        animation: {
+          duration: 400,
+          timingFunc: 'easeIn'
+        }
+      })
+      wx.hideLoading()
+    }).catch( e => {
+      this.setData({ title:'获取数据异常',movie:{} })
+      console.error(e)
+      wx.hideLoading()
+    })
+
+
   },
 
   /**
@@ -88,6 +92,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    return {
+      title:this.data.title,
+      desc:this.data.title,
+      path:'/pages/item?id='+this.data.id
+    }
   }
 })
